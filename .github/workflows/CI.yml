@@ -1,0 +1,129 @@
+name: CI
+
+on:
+    push:
+    pull_request:
+
+jobs:
+    secret-detection:
+        name: 🕵️ Secret Detection
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
+
+            - name: Run GitHub Secret Scanning (gitleaks)
+              uses: gitleaks/gitleaks-action@v2
+              with:
+                  args: detect --source . --no-git --redact
+
+    sast:
+        name: 🧠 SAST (Static Application Security Testing)
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
+
+            - name: Run CodeQL Analysis
+              uses: github/codeql-action/analyze@v3
+              with:
+                  category: "/language:php"
+
+    security-checker:
+        name: 🔒 Security Checker
+        runs-on: ubuntu-latest
+        container:
+            image: jakzal/phpqa
+        needs: [secret-detection, sast]
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
+
+            - name: Cache Composer dependencies
+              uses: actions/cache@v4
+              with:
+                  path: |
+                      vendor
+                      ~/.composer/cache
+                  key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+                  restore-keys: |
+                      ${{ runner.os }}-composer-
+
+            - name: Install dependencies
+              run: composer install --no-interaction --no-progress --prefer-dist
+
+            - name: Run local PHP security checker
+              run: local-php-security-checker composer.lock
+
+
+    php-code-standard:
+        name: 🧹 PHP Code Standards
+        runs-on: ubuntu-latest
+        container:
+            image: jakzal/phpqa
+        needs: security-checker
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
+
+            - name: Cache Composer dependencies
+              uses: actions/cache@v4
+              with:
+                  path: |
+                      vendor
+                      ~/.composer/cache
+                  key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+                  restore-keys: |
+                      ${{ runner.os }}-composer-
+
+            - name: Install dependencies
+              run: composer install --no-interaction --no-progress --prefer-dist
+
+            - name: Run PHP-CS-Fixer
+              run: php-cs-fixer fix ./src --dry-run --rules=@Symfony --verbose
+
+            - name: Run PHPStan
+              run: phpstan analyse ./src -l3
+
+            - name: Run PHPDD
+              run: phpdd ./src
+
+            - name: Run PHPCPD
+              run: phpcpd ./src --exclude './src/Controller/Admin/' --exclude './src/Entity'
+
+        continue-on-error: true
+
+
+    lint:
+        name: 🧩 Lint
+        runs-on: ubuntu-latest
+        container:
+            image: jakzal/phpqa
+        needs: php-code-standard
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
+
+            - name: Cache Composer dependencies
+              uses: actions/cache@v4
+              with:
+                  path: |
+                      vendor
+                      ~/.composer/cache
+                  key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+                  restore-keys: |
+                      ${{ runner.os }}-composer-
+
+            - name: Install dependencies
+              run: composer install --no-interaction --no-progress --prefer-dist
+
+            - name: Lint Twig
+              run: ./bin/console lint:twig templates --env=prod
+
+            - name: Lint YAML
+              run: ./bin/console lint:yaml config --parse-tags
+
+            - name: Validate Doctrine Schema
+              run: ./bin/console doctrine:schema:validate --skip-sync -vvv --no-interaction
+
+        continue-on-error: true
