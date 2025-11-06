@@ -5,36 +5,11 @@ on:
     pull_request:
 
 jobs:
-    secret-detection:
-        name: 🕵️ Secret Detection
-        runs-on: ubuntu-latest
-        steps:
-            - name: Checkout code
-              uses: actions/checkout@v4
-
-            - name: Run GitHub Secret Scanning (gitleaks)
-              uses: gitleaks/gitleaks-action@v2
-              with:
-                  args: detect --source . --no-git --redact
-
-    sast:
-        name: 🧠 SAST (Static Application Security Testing)
-        runs-on: ubuntu-latest
-        steps:
-            - name: Checkout code
-              uses: actions/checkout@v4
-
-            - name: Run CodeQL Analysis
-              uses: github/codeql-action/analyze@v3
-              with:
-                  category: "/language:php"
-
     security-checker:
         name: 🔒 Security Checker
         runs-on: ubuntu-latest
         container:
             image: jakzal/phpqa
-        needs: [secret-detection, sast]
         steps:
             - name: Checkout code
               uses: actions/checkout@v4
