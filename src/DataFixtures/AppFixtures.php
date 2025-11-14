@@ -39,7 +39,7 @@ class AppFixtures extends Fixture
             $plainPassword = $userData['plainPassword'] ?? null;
             unset($userData['plainPassword']);
 
-            if ($plainPassword !== null) {
+            if (null !== $plainPassword) {
                 // Créer un utilisateur temporaire pour le hashage
                 $tempUser = new User();
                 $tempUser->setEmail($userData['email'] ?? 'temp@example.com');
