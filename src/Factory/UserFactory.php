@@ -12,7 +12,7 @@ use Zenstruck\Foundry\Persistence\PersistentObjectFactory;
 final class UserFactory extends PersistentObjectFactory
 {
     public function __construct(
-        private readonly UserPasswordHasherInterface $passwordHasher
+        private readonly UserPasswordHasherInterface $passwordHasher,
     ) {
         parent::__construct();
     }
