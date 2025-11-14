@@ -28,8 +28,8 @@ class Article
     #[ORM\Column(type: Types::TEXT)]
     private ?string $fullDescription = null;
 
-    #[ORM\Column]
-    private ?int $price = null;
+    #[ORM\Column(type: Types::FLOAT)]
+    private ?float $price = null;
 
     /**
      * @var Collection<int, OrderLine>
@@ -95,12 +95,12 @@ class Article
         return $this;
     }
 
-    public function getPrice(): ?int
+    public function getPrice(): ?float
     {
         return $this->price;
     }
 
-    public function setPrice(int $price): static
+    public function setPrice(float $price): static
     {
         $this->price = $price;
 
