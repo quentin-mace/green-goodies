@@ -35,7 +35,7 @@ class AppFixtures extends Fixture
 
     private function loadArticlesData(): array
     {
-        $filePath = __DIR__ . '/../../config/fixtures/articles.yaml';
+        $filePath = __DIR__.'/../../config/fixtures/articles.yaml';
         $data = Yaml::parseFile($filePath);
 
         return $data['articles'] ?? [];
@@ -43,7 +43,7 @@ class AppFixtures extends Fixture
 
     private function loadUsersData(): array
     {
-        $filePath = __DIR__ . '/../../config/fixtures/users.yaml';
+        $filePath = __DIR__.'/../../config/fixtures/users.yaml';
         $data = Yaml::parseFile($filePath);
 
         return $data['users'] ?? [];
