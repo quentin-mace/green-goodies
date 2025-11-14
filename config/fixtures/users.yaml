@@ -1,0 +1,14 @@
+users:
+  - email:                     "admin@greengoodies.com"
+    plainPassword:             "admin"
+    firstName:                 "Admin"
+    lastName:                  "User"
+    roles:                     [ "ROLE_ADMIN" ]
+    apiEnabled:                true
+
+  - email:                     "user@greengoodies.com"
+    plainPassword:             "user"
+    firstName:                 "Regular"
+    lastName:                  "User"
+    roles:                     []
+    apiEnabled:                false
