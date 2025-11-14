@@ -2,14 +2,21 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\User;
 use App\Factory\ArticleFactory;
 use App\Factory\UserFactory;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Yaml\Yaml;
 
 class AppFixtures extends Fixture
 {
+    public function __construct(
+        private readonly UserPasswordHasherInterface $passwordHasher,
+    ) {
+    }
+
     public function load(ObjectManager $manager): void
     {
         $articles = $this->loadArticlesData();
@@ -29,6 +36,17 @@ class AppFixtures extends Fixture
     private function createUsers(array $users): void
     {
         foreach ($users as $userData) {
+            $plainPassword = $userData['plainPassword'] ?? null;
+            unset($userData['plainPassword']);
+
+            if ($plainPassword !== null) {
+                // Créer un utilisateur temporaire pour le hashage
+                $tempUser = new User();
+                $tempUser->setEmail($userData['email'] ?? 'temp@example.com');
+                $hashedPassword = $this->passwordHasher->hashPassword($tempUser, $plainPassword);
+                $userData['password'] = $hashedPassword;
+            }
+
             UserFactory::createOne($userData);
         }
     }
