@@ -22,9 +22,9 @@ class ArticleCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
-            IdField::new('id'),
+            IdField::new('id')->hideOnForm(),
             TextField::new('name'),
-            ImageField::new('pictureLink'),
+            ImageField::new('pictureLink')->setUploadDir('public/images'),
             TextField::new('shortDescription'),
             TextField::new('fullDescription')->hideOnIndex(),
             NumberField::new('price'),
