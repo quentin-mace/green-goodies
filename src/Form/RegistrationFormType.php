@@ -11,7 +11,6 @@ use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
@@ -24,38 +23,12 @@ class RegistrationFormType extends AbstractType
             ->add('email', EmailType::class, [
                 'label' => 'Adresse email',
                 'attr' => ['autocomplete' => 'email'],
-                'constraints' => [
-                    new NotBlank([
-                        'message' => 'Veuillez renseigner votre adresse email.',
-                    ]),
-                    new Email([
-                        'message' => 'Veuillez renseigner une adresse email valide.',
-                    ]),
-                ],
             ])
             ->add('firstName', TextType::class, [
                 'label' => 'Prénom',
-                'constraints' => [
-                    new NotBlank([
-                        'message' => 'Veuillez renseigner votre prénom.',
-                    ]),
-                    new Length([
-                        'max' => 255,
-                        'maxMessage' => 'Le prénom ne peut pas dépasser {{ limit }} caractères.',
-                    ]),
-                ],
             ])
             ->add('lastName', TextType::class, [
                 'label' => 'Nom',
-                'constraints' => [
-                    new NotBlank([
-                        'message' => 'Veuillez renseigner votre nom.',
-                    ]),
-                    new Length([
-                        'max' => 255,
-                        'maxMessage' => 'Le nom ne peut pas dépasser {{ limit }} caractères.',
-                    ]),
-                ],
             ])
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,
