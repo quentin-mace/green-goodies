@@ -30,8 +30,8 @@ class RegistrationFormType extends AbstractType
                     ]),
                     new Email([
                         'message' => 'Veuillez renseigner une adresse email valide.',
-                    ])
-                ]
+                    ]),
+                ],
             ])
             ->add('firstName', TextType::class, [
                 'label' => 'Prénom',
