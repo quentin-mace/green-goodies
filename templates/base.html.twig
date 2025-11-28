@@ -13,7 +13,12 @@
         {% endblock %}
     </head>
     <body>
-        {{ include('partial/_header.html.twig') }}
-        {% block body %}{% endblock %}
+        <div id="app" class="flex flex-col min-h-screen justify-between">
+            {{ include('partial/_header.html.twig') }}
+            <main class="flex-grow">
+                {% block body %}{% endblock %}
+            </main>
+            {{ include('partial/_footer.html.twig') }}
+        </div>
     </body>
 </html>
