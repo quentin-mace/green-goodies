@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Bienvenue{% endblock %}
+
+{% block body %}
+
+    {{ include('/home/partial/_hero.html.twig') }}
+
+    {{ include('/home/partial/_article_list.html.twig') }}
+
+    {{ include('/home/partial/_convictions_values.html.twig') }}
+
+{% endblock %}
