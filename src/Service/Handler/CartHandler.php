@@ -8,7 +8,6 @@ use App\Entity\OrderLine;
 use App\Entity\User;
 use App\Repository\OrderLineRepository;
 use App\Repository\OrderRepository;
-use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 
 class CartHandler
@@ -51,7 +50,7 @@ class CartHandler
         $order = new Order();
         $order->setClient($client);
         $order->setIsComplete(false);
-        $order->setCreationDate(new DateTime());
+        $order->setCreationDate(new \DateTime());
         $this->entityManager->persist($order);
 
         return $order;
