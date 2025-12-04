@@ -3,13 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Article;
-use App\Entity\Order;
-use App\Entity\OrderLine;
 use App\Entity\User;
-use App\Repository\OrderLineRepository;
-use App\Repository\OrderRepository;
 use App\Service\Handler\CartHandler;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;

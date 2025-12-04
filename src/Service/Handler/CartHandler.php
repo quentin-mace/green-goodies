@@ -8,7 +8,6 @@ use App\Entity\OrderLine;
 use App\Entity\User;
 use App\Repository\OrderLineRepository;
 use App\Repository\OrderRepository;
-use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 
 class CartHandler
@@ -16,11 +15,10 @@ class CartHandler
     public function __construct(
         private readonly OrderLineRepository $lineRepository,
         private readonly OrderRepository $orderRepository,
-        private readonly EntityManagerInterface $entityManager
-    )
-    {
-
+        private readonly EntityManagerInterface $entityManager,
+    ) {
     }
+
     public function addToCart(Article $article, User $client, int $quantity): void
     {
         $currentOrder = $this->orderRepository->findOneBy(['client' => $client, 'isComplete' => false]);
@@ -51,7 +49,7 @@ class CartHandler
         $order = new Order();
         $order->setClient($client);
         $order->setIsComplete(false);
-        $order->setCreationDate(new DateTime());
+        $order->setCreationDate(new \DateTime());
 
         return $order;
     }
