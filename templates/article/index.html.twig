@@ -22,11 +22,18 @@
             {# Call to action #}
             <div class="w-full">
             {% if app.user %}
-                {# ToDo : Use a formType (or createformbuilder) to create the add to order button #}
-                <form action="{#{{ path('app_cart_add', {'id': article.id}) }}#}#" method="POST" class="w-full flex flex-row gap-4">
-                    <input id="quantity" type="number" value="1" class="w-[77px] h-[77px] border border-[#666666] text-center">
-                    <btn class="w-full h-[77px] bg-[#565656] hover:bg-black text-white flex justify-center items-center cursor-pointer font-normal text-sm">Ajouter au panier</btn>
-                </form>
+                {{ form_start(form) }}
+                <div class="w-full flex flex-col items-center justify-center">
+                    <div>
+                        {{ form_errors(form) }}
+                    </div>
+
+                    <div class="w-full flex flex-row gap-4">
+                        {{ form_widget(form.quantity, {'attr': {'class': 'w-[77px] h-[77px] border border-[#666666] text-center'}}) }}
+                        {{ form_widget(form.save, {'attr': {'class': 'w-full h-[77px] bg-[#565656] hover:bg-black text-white flex justify-center items-center cursor-pointer font-normal text-sm'}}) }}
+                    </div>
+                </div>
+                {{ form_end(form) }}
             {% else %}
                 <div class="flex flex-col justify-center items-center">
                     <p class="font-normal text-sm text-red-500">Veuillez vous connecter pour ajouter cet article au panier</p>
