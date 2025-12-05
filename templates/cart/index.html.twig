@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon panier{% endblock %}
+
+{% block body %}
+<div class="min-h-[82vh] flex flex-col justify-center items-center bg-[#F7F1EC] gap-2">
+    <h2 class="font-medium text-xl">Mon panier</h2>
+    <div class="w-2/5 flex flex-col gap-2">
+        {% if cart %}
+            <a href="#" class="font-normal text-sm text-[#666666] hover:underline">x Vider le panier</a>
+            {#  #}
+            {% for line in cart.orderLines %}
+                <div class="flex flex-row p-11 gap-12 bg-[#FFFDF7]">
+                    <div class="w-1/4 h-[130px]">
+                        <img src="{{ asset(line.article.pictureLink) }}"  alt="Image for {{ line.article.shortDescription }}" class="w-full h-full object-cover object-center"/>
+                    </div>
+                    <div class="flex flex-col justify-center gap-3">
+                        <div class="text-sm">
+                            <p class="font-semibold">{{ line.article.name }}</p>
+                            <p class="font-normal text-[#666666]">Quantité : {{ line.quantity }}</p>
+                        </div>
+                        <p class="font-medium text-lg">{{ line.totalPrice | format_currency('EUR', locale: 'fr') }}</p>
+                    </div>
+                </div>
+            {% endfor %}
+            <div class="flex flex-col items-end p-8 bg-[#FFFDF7]">
+                <p class="font-medium text-sm">Total panier : <span class="font-normal text-xl">{{ cart.totalPrice | format_currency('EUR', locale: 'fr') }}</span></p>
+                <p class="font-normal text-xs text-[#666666]">Frais de livraison : Offert</p>
+            </div>
+            <div class="flex justify-center items-center">
+                <a href="#" class="w-4/5 h-[77px] bg-[#565656] hover:bg-black text-white flex justify-center items-center cursor-pointer font-normal text-sm">Valider la commande</a>
+            </div>
+        {% else %}
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

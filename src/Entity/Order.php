@@ -108,4 +108,15 @@ class Order
 
         return $this;
     }
+
+    public function getTotalPrice(): float
+    {
+        $lines = $this->getOrderLines();
+        $total = 0;
+        foreach ($lines as $line) {
+            $total += $line->getTotalPrice();
+        }
+
+        return $total;
+    }
 }
