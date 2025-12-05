@@ -31,7 +31,7 @@ final class ArticleController extends AbstractController
 
             $cartHandler->addToCart($article, $client, $quantity);
 
-            return $this->redirectToRoute('admin_order_index');
+            return $this->redirectToRoute('app_cart');
         }
 
         return $this->render('article/index.html.twig', [
