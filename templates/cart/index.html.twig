@@ -31,6 +31,12 @@
                 <a href="#" class="w-4/5 h-[77px] bg-[#565656] hover:bg-black text-white flex justify-center items-center cursor-pointer font-normal text-sm">Valider la commande</a>
             </div>
         {% else %}
+            <div class="flex flex-row p-11 bg-[#FFFDF7] justify-center items-center">
+                <p class="font-normal text-sm text-[#666666] italic">Votre panier est vide</p>
+            </div>
+            <div class="flex justify-center items-center">
+                <a href="{{ path('app_home') }}" class="w-4/5 h-[77px] bg-[#565656] hover:bg-black text-white flex justify-center items-center cursor-pointer font-normal text-sm">Voir le magasin</a>
+            </div>
         {% endif %}
     </div>
 </div>
