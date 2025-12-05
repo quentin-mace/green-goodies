@@ -3,20 +3,46 @@
 {% block title %}Inscription{% endblock %}
 
 {% block body %}
-    <h1>Inscription</h1>
-    <h3>Tous les champs sont obligatoires.</h3>
+    <div class="w-full flex flex-row justify-center items-start">
+        <img src="{{ asset('images/register.jpg') }}" alt="Branch" class="w-1/2">
+        <div class="w-1/2 flex flex-col items-center pt-16">
+            {{ form_errors(registrationForm) }}
 
-    {{ form_errors(registrationForm) }}
+            {{ form_start(registrationForm, {'attr': {'class': 'w-2/3 flex flex-col gap-7'}}) }}
+            <div class="w-full flex flex-col gap-1">
+                <h2 class="font-medium text-xl">Inscription</h2>
+                <h3 class="font-normal text-xs text-[#666666]">Tous les champs sont obligatoires.</h3>
+            </div>
+            <div class="w-full flex flex-col gap-2">
+                {{ form_label(registrationForm.lastName, null, {'label_attr': {'class': 'font-normal text-sm text-[#666666]'}}) }}
+                {{ form_widget(registrationForm.lastName, {'attr': {'class': 'w-full h-[77px] border border-[#666666] p-4 text-xl'}}) }}
+            </div>
+            <div class="w-full flex flex-col gap-2">
+                {{ form_label(registrationForm.firstName, null, {'label_attr': {'class': 'font-normal text-sm text-[#666666]'}}) }}
+                {{ form_widget(registrationForm.firstName, {'attr': {'class': 'w-full h-[77px] border border-[#666666] p-4 text-xl'}}) }}
+            </div>
+            <div class="w-full flex flex-col gap-2">
+                {{ form_label(registrationForm.email, null, {'label_attr': {'class': 'font-normal text-sm text-[#666666]'}}) }}
+                {{ form_widget(registrationForm.email, {'attr': {'class': 'w-full h-[77px] border border-[#666666] p-4 text-xl'}}) }}
+            </div>
+            <div class="w-full flex flex-col gap-2">
+                {{ form_label(registrationForm.plainPassword.first, 'Mot de passe', {'label_attr': {'class': 'font-normal text-sm text-[#666666]'}}) }}
+                {{ form_widget(registrationForm.plainPassword.first, {'attr': {'class': 'w-full h-[77px] border border-[#666666] p-4 text-xl'}}) }}
+            </div>
+            <div class="w-full flex flex-col gap-2">
+                {{ form_label(registrationForm.plainPassword.second, 'Confirmation mot de passe', {'label_attr': {'class': 'font-normal text-sm text-[#666666]'}}) }}
+                {{ form_widget(registrationForm.plainPassword.second, {'attr': {'class': 'w-full h-[77px] border border-[#666666] p-4 text-xl'}}) }}
+            </div>
+            <div class="w-full flex flex-row-reverse gap-2 justify-end">
+                {{ form_label(registrationForm.agreeTerms, null, {'label_attr': {'class': 'font-normal text-sm text-[#666666]'}}) }}
+                {{ form_widget(registrationForm.agreeTerms, {'attr': {'class': 'w-[19px] h-[19px] border border-[#666666] rounded-none appearance-none checked:bg-black'}}) }}
+            </div>
 
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.lastName) }}
-        {{ form_row(registrationForm.firstName) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.plainPassword.first, { label: 'Mot de passe' }) }}
-        {{ form_row(registrationForm.plainPassword.second, { label: 'Confirmation mot de passe' }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
-
-        <button type="submit" class="btn">S’inscrire</button>
-    {{ form_end(registrationForm) }}
-    <a href="{{ path('app_login') }}">Déjà un compte ? Se connecter</a>
+            <button type="submit" class="w-full h-[77px] bg-[#565656] hover:bg-black text-white flex justify-center items-center cursor-pointer font-normal text-sm">S’inscrire</button>
+            <div class="flex flex-col items-center font-normal text-sm text-[#666666] underline">
+                <a href="{{ path('app_login') }}">Déjà un compte ? Se connecter</a>
+            </div>
+            {{ form_end(registrationForm) }}
+        </div>
+    </div>
 {% endblock %}

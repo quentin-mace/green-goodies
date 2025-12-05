@@ -6,7 +6,7 @@
     <div class="w-full flex flex-row justify-center items-start">
         <img src="{{ asset('images/conviction.jpg') }}" alt="Branch" class="w-1/2">
         <div class="w-1/2 flex flex-col items-center pt-16">
-            <form method="post" class="w-2/3 flex flex-col gap-5">
+            <form method="post" class="w-2/3 flex flex-col gap-7">
                 {% if error %}
                     <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
                 {% endif %}
