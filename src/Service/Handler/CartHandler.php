@@ -19,15 +19,20 @@ class CartHandler
     ) {
     }
 
+    public function getCart(User $client): ?Order
+    {
+        return $this->orderRepository->findOneBy(['client' => $client, 'isComplete' => false]);
+    }
+
     public function addToCart(Article $article, User $client, int $quantity): void
     {
-        $currentOrder = $this->orderRepository->findOneBy(['client' => $client, 'isComplete' => false]);
+        $currentOrder = $this->getCart($client);
         if (!$currentOrder) {
             $currentOrder = $this->buildOrder($client);
         }
         $orderLine = $this->lineRepository->findOneBy(['article' => $article, 'parentOrder' => $currentOrder]);
         if (!$orderLine) {
-            $orderLine = $this->builOrderLine($article, $currentOrder);
+            $orderLine = $this->buildOrderLine($article, $currentOrder);
         }
         $orderLine->setQuantity($orderLine->getQuantity() + $quantity);
 
@@ -56,7 +61,7 @@ class CartHandler
         return $order;
     }
 
-    private function builOrderLine(Article $article, Order $parentOrder): OrderLine
+    private function buildOrderLine(Article $article, Order $parentOrder): OrderLine
     {
         $orderLine = new OrderLine();
         $orderLine->setArticle($article);
@@ -66,5 +71,22 @@ class CartHandler
         $this->entityManager->persist($parentOrder);
 
         return $orderLine;
+    }
+
+    public function emptyCart(User $client): void
+    {
+        $cart = $this->getCart($client);
+        if ($cart) {
+            $this->entityManager->remove($cart);
+            $this->entityManager->flush();
+        }
+    }
+
+    public function validateCart(User $client): void
+    {
+        $cart = $this->getCart($client);
+        $cart->setIsComplete(true);
+        $this->entityManager->persist($cart);
+        $this->entityManager->flush();
     }
 }
