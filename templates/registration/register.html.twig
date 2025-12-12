@@ -48,7 +48,9 @@
                 {{ form_label(registrationForm.plainPassword.second, 'Confirmation mot de passe', {'label_attr': {'class': 'font-normal text-sm text-[#666666]'}}) }}
                 {{ form_widget(registrationForm.plainPassword.second, {'attr': {'class': 'w-full h-[77px] border border-[#666666] p-4 text-xl'}}) }}
             </div>
-            {{ form_errors(registrationForm.agreeTerms, { 'attr': {'class': 'font-normal text-sm text-red-500'}}) }}
+            <div class="font-normal text-sm text-red-500">
+                {{ form_errors(registrationForm.agreeTerms) }}
+            </div>
             <div class="w-full flex flex-row-reverse gap-2 justify-end">
                 {{ form_label(registrationForm.agreeTerms, null, {'label_attr': {'class': 'font-normal text-sm text-[#666666]'}}) }}
                 <div class="border border-[#666666] w-[19px] h-[19px] flex justify-center items-center">
