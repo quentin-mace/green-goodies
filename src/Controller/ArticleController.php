@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Attribute\Route;
 
 final class ArticleController extends AbstractController
 {
-    #[Route('/article/{id}', name: 'app_article', requirements: ['id' => "\d+"])]
+    #[Route('/article/{id}', name: 'app_article', requirements: ['id' => "\d+"], methods: ['GET', 'POST'])]
     public function index(Article $article, Request $request, CartHandler $cartHandler): Response
     {
         $form = $this->createFormBuilder()

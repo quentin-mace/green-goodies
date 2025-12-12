@@ -20,7 +20,7 @@ final class AccountController extends AbstractController
     ) {
     }
 
-    #[Route('', name: '')]
+    #[Route('', name: '', methods: ['GET'])]
     public function index(OrderRepository $repository): Response
     {
         $currentUser = $this->getUser();
