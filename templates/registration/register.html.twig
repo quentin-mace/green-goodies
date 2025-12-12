@@ -35,7 +35,9 @@
             </div>
             <div class="w-full flex flex-row-reverse gap-2 justify-end">
                 {{ form_label(registrationForm.agreeTerms, null, {'label_attr': {'class': 'font-normal text-sm text-[#666666]'}}) }}
-                {{ form_widget(registrationForm.agreeTerms, {'attr': {'class': 'w-[19px] h-[19px] border border-[#666666] rounded-none appearance-none checked:bg-black'}}) }}
+                <div class="border border-[#666666] w-[19px] h-[19px] flex justify-center items-center">
+                    {{ form_widget(registrationForm.agreeTerms, {'attr': {'class': 'w-[90%] h-[90%] rounded-none appearance-none checked:bg-black'}}) }}
+                </div>
             </div>
 
             <button type="submit" class="w-full h-[77px] bg-[#565656] hover:bg-black text-white flex justify-center items-center cursor-pointer font-normal text-sm">S’inscrire</button>

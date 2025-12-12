@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Commande confirmée{% endblock %}
+
+{% block body %}
+<div class="min-h-[82vh] flex flex-col justify-center items-center bg-[#F7F1EC] gap-6 py-20">
+    <h2 class="font-medium text-xl">Merci pour votre commande !</h2>
+
+    <div class="w-2/5 flex flex-col gap-4">
+        {% if order %}
+            <div class="font-normal text-sm text-[#666666]">
+                <p>Votre commande à bien été prise en compte.</p>
+                <p>Nos équipes vont la traiter avec amour.</p>
+                <p>Vous recevrez un mail quand celle ci sera envoyée.</p>
+            </div>
+            <div class="flex flex-col gap-6 p-10 bg-[#FFFDF7]">
+                <div class="flex flex-row justify-between items-start gap-3">
+                    <div class="flex flex-col gap-1">
+                        <p class="font-semibold text-lg">Résumé de la commande</p>
+                        <p class="font-normal text-sm text-[#666666]">Référence #{{ order.id }} · {{ order.creationDate|date('d/m/Y') }}</p>
+                    </div>
+                    <span class="px-3 py-1 text-xs bg-[#497555] text-white uppercase tracking-wide rounded">Validée</span>
+                </div>
+
+                <table class="w-full">
+                    <thead class="border-b border-[#F1E9E0] mb-2">
+                    <tr>
+                        <th class="font-normal text-left">Article</th>
+                        <th class="font-normal text-left">Prix</th>
+                        <th class="font-normal text-left">Quantité</th>
+                        <th class="font-normal text-right">Prix total</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for line in order.orderLines %}
+                        <tr class="gap-4">
+                            <td class="font-semibold text-sm">{{ line.article.name }}</td>
+                            <td class="font-normal text-xs text-[#666666]">{{ line.article.price | format_currency('EUR', locale: 'fr') }}</td>
+                            <td class="font-normal text-xs text-[#666666]">{{ line.quantity }}</td>
+                            <td class="text-right font-medium text-sm">{{ line.totalPrice | format_currency('EUR', locale: 'fr') }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+
+                <div class="flex flex-col items-end gap-1 border-t border-[#F1E9E0] pt-4">
+                    <p class="font-normal text-xs text-[#666666]">Frais de livraison : Offert</p>
+                    <p class="font-medium text-sm">Total : <span class="font-normal text-xl">{{ order.totalPrice | format_currency('EUR', locale: 'fr') }}</span></p>
+                </div>
+            </div>
+
+            <div class="flex flex-row gap-4 justify-center">
+                <a href="{{ path('app_home') }}" class="w-1/2 h-[77px] bg-[#565656] hover:bg-black text-white flex justify-center items-center cursor-pointer font-normal text-sm">Continuer mes achats</a>
+                <a href="#" class="w-1/2 h-[77px] bg-white border border-[#565656] text-[#565656] hover:bg-black hover:text-white flex justify-center items-center cursor-pointer font-normal text-sm">Voir mon compte</a>
+            </div>
+        {% else %}
+            <div class="flex flex-row p-11 bg-[#FFFDF7] justify-center items-center">
+                <p class="font-normal text-sm text-[#666666] italic text-center">Aucune commande récente à afficher.</p>
+            </div>
+            <div class="flex justify-center items-center">
+                <a href="{{ path('app_home') }}" class="w-4/5 h-[77px] bg-[#565656] hover:bg-black text-white flex justify-center items-center cursor-pointer font-normal text-sm">Voir le magasin</a>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

@@ -17,7 +17,7 @@ class Order
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTime $creationDate = null;
 
     #[ORM\Column]
@@ -107,5 +107,16 @@ class Order
         $this->client = $client;
 
         return $this;
+    }
+
+    public function getTotalPrice(): float
+    {
+        $lines = $this->getOrderLines();
+        $total = 0;
+        foreach ($lines as $line) {
+            $total += $line->getTotalPrice();
+        }
+
+        return $total;
     }
 }
