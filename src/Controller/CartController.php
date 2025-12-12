@@ -19,7 +19,7 @@ final class CartController extends AbstractController
     ) {
     }
 
-    #[Route('', name: '')]
+    #[Route('', name: '', methods: ['GET'])]
     public function show(): Response
     {
         /* @var User $client */
@@ -31,7 +31,7 @@ final class CartController extends AbstractController
         ]);
     }
 
-    #[Route('/empty', name: '_empty')]
+    #[Route('/empty', name: '_empty', methods: ['POST'])]
     public function emptyCart(): Response
     {
         /* @var User $client */
@@ -42,7 +42,7 @@ final class CartController extends AbstractController
         return $this->redirectToRoute('app_cart');
     }
 
-    #[Route('/validate', name: '_validate')]
+    #[Route('/validate', name: '_validate', methods: ['POST'])]
     public function validateCart(): Response
     {
         /* @var User $client */
@@ -53,7 +53,7 @@ final class CartController extends AbstractController
         return $this->redirectToRoute('app_cart_confirm');
     }
 
-    #[Route('/confirm', name: '_confirm')]
+    #[Route('/confirm', name: '_confirm', methods: ['GET'])]
     public function confirmValidation(OrderRepository $repository): Response
     {
         /* @var User $client */
