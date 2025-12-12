@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon compte{% endblock %}
+
+{% block body %}
+    <div class="min-h-[82vh] flex flex-col justify-center items-center bg-[#F7F1EC] gap-2 py-10">
+        <h2 class="font-medium text-xl mb-10">Mon compte</h2>
+        <div class="w-2/5 flex flex-col gap-2">
+            <div class="flex flex-col p-11 gap-2 bg-[#FFFDF7]">
+                <h3 class="font-semibold text-sm mb-3">Mes commandes</h3>
+                {% if orders is not empty %}
+                    <table class="w-full border-collapse table-fixed">
+                        <thead>
+                        <tr class="text-left">
+                            <th class="py-2 text-sm font-normal text-[#666666] w-3/8">N°</th>
+                            <th class="py-2 text-sm font-normal text-[#666666] w-4/8">Date</th>
+                            <th class="py-2 text-sm font-normal text-[#666666] w-1/8">Prix</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for order in orders %}
+                            {% if loop.last == false %}
+                                {% set border = 'border-b border-gray-200' %}
+                            {% else %}
+                                {% set border = '' %}
+                            {% endif %}
+                            <tr class="{{ border }}">
+                                <td class="py-6 text-sm w-3/8">{{ order.id | format_number({min_integer_digit: 2}) }}</td>
+                                <td class="py-6 text-sm w-4/8">{{ order.creationDate|date('d/m/Y') }}</td>
+                                <td class="py-6 text-sm w-1/8">{{ order.totalPrice|format_currency('EUR', locale='fr') }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                {% else %}
+                    <p class="py-4 px-4 text-sm text-center text-gray-500 italic">Aucune commande</p>
+                {% endif %}
+            </div>
+            <div class="flex flex-col p-11 gap-2 bg-[#FFFDF7]">
+                <h3 class="font-semibold text-sm mb-3">Mon accès API</h3>
+                <form action="{{ path('app_account_api_access') }}" method="post" class="w-full">
+                    <button type="submit"
+                            class="w-full h-[77px] bg-[#565656] hover:bg-black text-white flex justify-center items-center cursor-pointer font-normal text-sm">
+                        {% if hasApiAccess %}
+                            Désactiver mon accès API
+                        {% else %}
+                            Activer mon accès API
+                        {% endif %}
+                    </button>
+                </form>
+            </div>
+            <div class="flex flex-col p-11 gap-2 bg-[#FFFDF7]">
+                <form action="{{ path('app_account_delete_account') }}" method="post" class="w-full">
+                    <button type="submit" onclick="return confirm('Êtes vous sûr de vouloir supprimer votre compte ?')"
+                            class="w-full h-[77px] bg-[#565656] hover:bg-black text-white flex justify-center items-center cursor-pointer font-normal text-sm">
+                        Supprimer mon compte
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
