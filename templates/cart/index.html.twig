@@ -8,7 +8,6 @@
     <div class="w-2/5 flex flex-col gap-2">
         {% if cart %}
             <a href="{{ path('app_cart_empty') }}" class="font-normal text-sm text-[#666666] hover:underline">x Vider le panier</a>
-            {#  #}
             {% for line in cart.orderLines %}
                 <div class="flex flex-row p-11 gap-12 bg-[#FFFDF7]">
                     <div class="w-1/4 h-[130px]">

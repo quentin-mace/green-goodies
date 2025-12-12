@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Repository\OrderRepository;
 use App\Service\Handler\CartHandler;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -47,6 +48,19 @@ final class CartController extends AbstractController
 
         $this->cartHandler->validateCart($client);
 
-        return $this->redirectToRoute('app_home');
+        return $this->redirectToRoute('app_cart_confirm');
+    }
+
+    #[Route('/confirm', name: '_confirm')]
+    public function confirmValidation(OrderRepository $repository): Response
+    {
+        /* @var User $client */
+        $client = $this->getUser();
+
+        $order = $repository->findOneBy(['client' => $client], ['creationDate' => 'DESC']);
+
+        return $this->render('cart/confirm.html.twig', [
+            'order' => $order,
+        ]);
     }
 }
