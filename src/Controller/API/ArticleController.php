@@ -30,6 +30,7 @@ class ArticleController extends AbstractController
      * Un système de cache est utilisé pour améliorer les performances.
      *
      * @return JsonResponse Liste des articles au format JSON
+     *
      * @throws ExceptionInterface|InvalidArgumentException
      */
     #[Route('', name: '')]

@@ -37,8 +37,6 @@ class SecurityController extends AbstractController
      *
      * Cette méthode ne sera jamais exécutée car elle est interceptée
      * par la configuration du firewall Symfony.
-     *
-     * @return void
      */
     #[Route(path: '/logout', name: 'app_logout', methods: ['GET'])]
     public function logout(): void

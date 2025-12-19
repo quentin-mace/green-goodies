@@ -18,8 +18,6 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
  * - Vider le panier
  * - Valider le panier (créer une commande)
  * - Confirmer la validation d'une commande
- *
- * @final
  */
 #[Route('/cart', name: 'app_cart')]
 #[IsGranted('IS_AUTHENTICATED_FULLY')]

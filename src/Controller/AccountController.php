@@ -18,8 +18,6 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
  * - Consulter leur profil et leurs commandes
  * - Activer/désactiver l'accès API
  * - Supprimer leur compte
- *
- * @final
  */
 #[Route('/account', name: 'app_account')]
 #[IsGranted('IS_AUTHENTICATED_FULLY')]

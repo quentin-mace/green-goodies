@@ -11,8 +11,6 @@ use Symfony\Component\Routing\Attribute\Route;
  * Controller gérant la page d'accueil du site.
  *
  * Ce controller affiche la liste de tous les articles disponibles sur la page d'accueil.
- *
- * @final
  */
 final class HomeController extends AbstractController
 {

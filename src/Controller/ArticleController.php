@@ -18,8 +18,6 @@ use Symfony\Component\Routing\Attribute\Route;
  * Ce controller permet de :
  * - Afficher les détails d'un article
  * - Ajouter un article au panier avec une quantité spécifiée
- *
- * @final
  */
 final class ArticleController extends AbstractController
 {
