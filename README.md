@@ -35,19 +35,40 @@ git clone git@github.com:quentin-mace/green-goodies.git
 cd green_goodies
 ```
 
-### Étape 2 : Installer les dépendances PHP
+## 🚀 Lancement rapide
+
+Si vous avez Docker et Docker Compose installés, vous pouvez utiliser la commande d'installation complète :
+
+```bash
+make first-install
+```
+
+Cette commande va :
+1. Démarrer les conteneurs Docker
+2. Installer les dépendances Composer
+3. Installer les dépendances npm
+4. Compiler les assets
+5. Configurer les permissions
+6. Créer la base de données
+7. Exécuter les migrations
+8. Démarrer le serveur Symfony
+9. Ouvrir le projet dans le navigateur
+
+### Installation manuelle
+
+### Étape 1 : Installer les dépendances PHP
 
 ```bash
 composer install
 ```
 
-### Étape 3 : Installer les dépendances JavaScript
+### Étape 2 : Installer les dépendances JavaScript
 
 ```bash
 npm install --force
 ```
 
-### Étape 4 : Configuration de l'environnement
+### Étape 3 : Configuration de l'environnement
 
 Copiez le fichier d'exemple de configuration :
 
@@ -73,7 +94,7 @@ DATABASE_URL="postgresql://app:!ChangeMe!@127.0.0.1:5432/app?serverVersion=16&ch
 - `app` : nom de la base de données
 - `5432` : port PostgreSQL (par défaut)
 
-### Étape 5 : Générer les clés JWT (pour l'authentification API)
+### Étape 4 : Générer les clés JWT (pour l'authentification API)
 
 Si vous souhaitez utiliser l'API avec authentification JWT, générez les clés nécessaires :
 
@@ -88,7 +109,7 @@ openssl pkey -in config/jwt/private.pem -out config/jwt/public.pem -pubout
 
 **Note** : Vous devrez entrer un mot de passe lors de la génération. Assurez-vous de le configurer dans le fichier `.env` avec la variable `JWT_PASSPHRASE` si vous en utilisez un.
 
-### Étape 6 : Créer la base de données
+### Étape 5 : Créer la base de données
 
 Si vous utilisez Docker Compose (recommandé) :
 
@@ -106,7 +127,7 @@ symfony console doctrine:database:create --if-not-exists
 make sf-dc
 ```
 
-### Étape 7 : Exécuter les migrations
+### Étape 6 : Exécuter les migrations
 
 ```bash
 # Avec Symfony CLI
@@ -116,7 +137,7 @@ symfony console doctrine:migrations:migrate --no-interaction
 make sf-dmm
 ```
 
-### Étape 8 : Charger les données de test (fixtures)
+### Étape 7 : Charger les données de test (fixtures)
 
 ```bash
 # Avec Symfony CLI
@@ -126,7 +147,7 @@ symfony console doctrine:fixtures:load --no-interaction
 make sf-fixtures
 ```
 
-### Étape 9 : Compiler les assets
+### Étape 8 : Compiler les assets
 
 ```bash
 # En mode développement
@@ -136,7 +157,7 @@ npm run dev
 npm run build
 ```
 
-### Étape 11 : Démarrer le serveur Symfony
+### Étape 9 : Démarrer le serveur Symfony
 
 ```bash
 # Avec Symfony CLI
@@ -147,25 +168,6 @@ make start
 ```
 
 Le serveur sera accessible à l'adresse : `http://localhost:8000`
-
-## 🚀 Lancement rapide
-
-Si vous avez Docker et Docker Compose installés, vous pouvez utiliser la commande d'installation complète :
-
-```bash
-make first-install
-```
-
-Cette commande va :
-1. Démarrer les conteneurs Docker
-2. Installer les dépendances Composer
-3. Installer les dépendances npm
-4. Compiler les assets
-5. Configurer les permissions
-6. Créer la base de données
-7. Exécuter les migrations
-8. Démarrer le serveur Symfony
-9. Ouvrir le projet dans le navigateur
 
 ## 🌐 Accès à l'application
 
