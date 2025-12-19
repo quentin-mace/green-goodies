@@ -3,6 +3,7 @@
 namespace App\Controller\API;
 
 use App\Repository\ArticleRepository;
+use Psr\Cache\InvalidArgumentException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,11 +14,23 @@ use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Contracts\Cache\ItemInterface;
 use Symfony\Contracts\Cache\TagAwareCacheInterface;
 
+/**
+ * Controller API pour la gestion des articles.
+ *
+ * Ce controller fournit des endpoints REST pour accéder aux articles.
+ * L'accès est réservé aux utilisateurs authentifiés ayant activé l'accès API.
+ */
 #[Route('/api/articles', name: 'api_articles')]
 class ArticleController extends AbstractController
 {
     /**
-     * @throws ExceptionInterface
+     * Retourne la liste de tous les articles au format JSON.
+     *
+     * Les articles sont sérialisés avec le groupe 'article:read'.
+     * Un système de cache est utilisé pour améliorer les performances.
+     *
+     * @return JsonResponse Liste des articles au format JSON
+     * @throws ExceptionInterface|InvalidArgumentException
      */
     #[Route('', name: '')]
     #[IsGranted('IS_AUTHENTICATED_FULLY')]

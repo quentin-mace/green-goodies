@@ -7,8 +7,18 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
+/**
+ * Controller gérant l'authentification des utilisateurs.
+ *
+ * Ce controller gère la connexion et la déconnexion des utilisateurs.
+ */
 class SecurityController extends AbstractController
 {
+    /**
+     * Affiche le formulaire de connexion et gère l'authentification.
+     *
+     * @return Response Page de connexion
+     */
     #[Route(path: '/login', name: 'app_login', methods: ['GET', 'POST'])]
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
@@ -22,6 +32,14 @@ class SecurityController extends AbstractController
         ]);
     }
 
+    /**
+     * Gère la déconnexion de l'utilisateur.
+     *
+     * Cette méthode ne sera jamais exécutée car elle est interceptée
+     * par la configuration du firewall Symfony.
+     *
+     * @return void
+     */
     #[Route(path: '/logout', name: 'app_logout', methods: ['GET'])]
     public function logout(): void
     {
