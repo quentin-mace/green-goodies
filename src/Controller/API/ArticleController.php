@@ -24,12 +24,13 @@ class ArticleController extends AbstractController
     public function index(
         SerializerInterface $serializer,
         ArticleRepository $repository,
-        TagAwareCacheInterface $cache
+        TagAwareCacheInterface $cache,
     ): JsonResponse {
         $idCache = 'articlesIndex';
 
         $articleList = $cache->get($idCache, function (ItemInterface $item) use ($repository) {
             $item->tag('articlesIndex');
+
             return $repository->findAll();
         });
 
