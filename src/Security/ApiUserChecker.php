@@ -14,8 +14,7 @@ class ApiUserChecker implements UserCheckerInterface
 
     public function checkPostAuth(UserInterface $user): void
     {
-        /* @var User $user */
-        if (!$user->isApiEnabled()) {
+        if ($user instanceof User && !$user->isApiEnabled()) {
             throw new ApiAccessDisabledException('API access is not enabled.');
         }
     }
