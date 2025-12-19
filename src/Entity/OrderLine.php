@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\OrderLineRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Attribute\Groups;
 
 #[ORM\Entity(repositoryClass: OrderLineRepository::class)]
 class OrderLine
