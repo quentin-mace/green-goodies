@@ -28,7 +28,7 @@ Avant de commencer, assurez-vous d'avoir installé les éléments suivants sur v
 
 ## 📦 Installation
 
-### Étape 1 : Cloner le projet
+### Cloner le projet
 
 ```bash
 git clone git@github.com:quentin-mace/green-goodies.git
@@ -54,7 +54,7 @@ Cette commande va :
 8. Démarrer le serveur Symfony
 9. Ouvrir le projet dans le navigateur
 
-### Installation manuelle
+## 🧑‍💻 Installation manuelle
 
 ### Étape 1 : Installer les dépendances PHP
 
