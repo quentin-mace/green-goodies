@@ -23,7 +23,6 @@ class ApiExceptionListener
 
         $response = new JsonResponse(
             [
-                'code' => 403,
                 'message' => $exception->getApiMessage(),
             ],
             403
