@@ -10,13 +10,13 @@ class ApiUserChecker implements UserCheckerInterface
 {
     public function checkPreAuth(UserInterface $user): void
     {
-        /* @var User $user */
-        if (!$user->isApiEnabled()) {
-            throw new ApiAccessDisabledException('API access is not enabled.');
-        }
     }
 
     public function checkPostAuth(UserInterface $user): void
     {
+        /* @var User $user */
+        if (!$user->isApiEnabled()) {
+            throw new ApiAccessDisabledException('API access is not enabled.');
+        }
     }
 }

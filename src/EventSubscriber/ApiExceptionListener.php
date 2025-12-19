@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Security;
+namespace App\EventSubscriber;
 
+use App\Security\ApiAccessDisabledException;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpKernel\Event\ExceptionEvent;
 
