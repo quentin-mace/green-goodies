@@ -15,27 +15,27 @@ class Article
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups("article:read")]
+    #[Groups('article:read')]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups("article:read")]
+    #[Groups('article:read')]
     private ?string $name = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    #[Groups("article:read")]
+    #[Groups('article:read')]
     private ?string $pictureLink = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups("article:read")]
+    #[Groups('article:read')]
     private ?string $shortDescription = null;
 
     #[ORM\Column(type: Types::TEXT)]
-    #[Groups("article:read")]
+    #[Groups('article:read')]
     private ?string $fullDescription = null;
 
     #[ORM\Column(type: Types::FLOAT)]
-    #[Groups("article:read")]
+    #[Groups('article:read')]
     private ?float $price = null;
 
     /**

@@ -2,7 +2,6 @@
 
 namespace App\Controller\API;
 
-use App\Entity\Article;
 use App\Repository\ArticleRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -27,5 +26,4 @@ class ArticleController extends AbstractController
 
         return new JsonResponse($jsonArticles, Response::HTTP_OK, [], json: true);
     }
-
 }
