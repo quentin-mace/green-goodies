@@ -8,7 +8,6 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 class ApiUserChecker implements UserCheckerInterface
 {
-
     public function checkPreAuth(UserInterface $user): void
     {
         /* @var User $user */
