@@ -31,7 +31,7 @@ Avant de commencer, assurez-vous d'avoir installé les éléments suivants sur v
 ### Étape 1 : Cloner le projet
 
 ```bash
-git clone <url-du-repo>
+git clone git@github.com:quentin-mace/green-goodies.git
 cd green_goodies
 ```
 
