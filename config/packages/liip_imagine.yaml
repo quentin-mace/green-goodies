@@ -3,9 +3,21 @@ liip_imagine:
     # valid drivers options include "gd" or "gmagick" or "imagick"
     driver: "gd"
     filter_sets:
+        small_thumb:
+            quality: 75
+            filters:
+                thumbnail:
+                    size: [400, 400]
+                    mode: inset
         medium_thumb:
             quality: 75
             filters:
                 thumbnail:
-                    size: [500, 500]
+                    size: [700, 700]
+                    mode: inset
+        big_thumb:
+            quality: 75
+            filters:
+                thumbnail:
+                    size: [1000, 1000]
                     mode: inset
