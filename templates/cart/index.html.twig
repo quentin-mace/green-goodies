@@ -13,7 +13,7 @@
             {% for line in cart.orderLines %}
                 <div class="flex flex-row p-11 gap-12 bg-[#FFFDF7]">
                     <div class="w-1/4 h-[130px]">
-                        <img src="{{ asset(line.article.pictureLink) }}"  alt="Image for {{ line.article.shortDescription }}" class="w-full h-full object-cover object-center"/>
+                        <img src="{{ asset(line.article.pictureLink) | imagine_filter('small_thumb') }}"  alt="Image for {{ line.article.shortDescription }}" class="w-full h-full object-cover object-center"/>
                     </div>
                     <div class="flex flex-col justify-center gap-3">
                         <div class="text-sm">
