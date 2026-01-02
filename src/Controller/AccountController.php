@@ -11,6 +11,14 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
+/**
+ * Controller gérant les fonctionnalités du compte utilisateur.
+ *
+ * Ce controller permet aux utilisateurs authentifiés de :
+ * - Consulter leur profil et leurs commandes
+ * - Activer/désactiver l'accès API
+ * - Supprimer leur compte
+ */
 #[Route('/account', name: 'app_account')]
 #[IsGranted('IS_AUTHENTICATED_FULLY')]
 final class AccountController extends AbstractController
@@ -20,6 +28,11 @@ final class AccountController extends AbstractController
     ) {
     }
 
+    /**
+     * Affiche la page du compte utilisateur avec la liste des commandes.
+     *
+     * @return Response Page du compte utilisateur
+     */
     #[Route('', name: '', methods: ['GET'])]
     public function index(OrderRepository $repository): Response
     {
@@ -36,6 +49,11 @@ final class AccountController extends AbstractController
         ]);
     }
 
+    /**
+     * Active ou désactive l'accès API pour l'utilisateur connecté.
+     *
+     * @return Response Redirection vers la page du compte
+     */
     #[Route('/api-access', name: '_api_access', methods: ['POST'])]
     public function changeApiAccess(): Response
     {
@@ -50,6 +68,11 @@ final class AccountController extends AbstractController
         return $this->redirectToRoute('app_account');
     }
 
+    /**
+     * Supprime le compte de l'utilisateur connecté et le déconnecte.
+     *
+     * @return Response Redirection vers la page d'accueil
+     */
     #[Route('/delete-account', name: '_delete_account', methods: ['POST'])]
     public function deleteAccount(Security $security): Response
     {
