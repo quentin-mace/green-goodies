@@ -7,6 +7,6 @@
         </p>
     </div>
     <div class="w-1/2">
-        <img class="w-full h-full object-cover object-center" src="{{ asset('images/hero.jpg') }}" alt="Hero image">
+        <img class="w-full h-full object-cover object-center" src="{{ asset('images/hero.jpg') | imagine_filter('big_thumb') }}" alt="Hero image">
     </div>
 </div>

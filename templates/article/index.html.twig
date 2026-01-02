@@ -5,7 +5,7 @@
 {% block body %}
     <div class="flex flex-row gap-0 h-[686px]">
         <div class="w-1/2">
-            <img class="w-full h-full object-cover object-center" src="{{ asset(article.pictureLink) }}" alt="{{ article.name }}">
+            <img class="w-full h-full object-cover object-center" src="{{ asset(article.pictureLink) | imagine_filter('big_thumb') }}" alt="{{ article.name }}">
         </div>
         <div class="w-1/2 flex flex-col justify-between items-center pt-28 px-28">
             <div class="h-96 flex flex-col justify-start gap-14">
