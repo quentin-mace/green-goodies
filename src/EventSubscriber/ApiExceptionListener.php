@@ -25,8 +25,6 @@ class ApiExceptionListener
      * kernel.exception. Elle vérifie si l'exception est une ApiAccessDisabledException
      * et si la requête concerne une route API. Si ces conditions sont remplies,
      * elle crée une réponse JSON avec le message d'erreur et un code HTTP 403.
-     *
-     * @return void
      */
     public function onKernelException(ExceptionEvent $event): void
     {
